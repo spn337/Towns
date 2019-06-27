@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Towns"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="806.66">
-    <Grid>
+    <Grid Margin="0,0,2,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="80"/>
             <RowDefinition Height="258"/>
