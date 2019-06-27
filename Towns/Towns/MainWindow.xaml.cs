@@ -34,6 +34,9 @@ namespace Towns
             TownTypes = new ObservableCollection<MVVM.TownTypeModel>();
             Towns = new ObservableCollection<MVVM.TownModel>();
 
+            lbRegions.ItemsSource = Regions;
+            lbTowns.ItemsSource = Towns;
+
             Read();
         }
         public void Read()

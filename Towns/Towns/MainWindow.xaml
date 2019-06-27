@@ -24,11 +24,31 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0">
             <StackPanel>
                 <Label></Label>
-                <ListBox HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="260"/>
+                <ListBox x:Name ="lbRegions" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="260">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Id}" />
+                                <TextBlock Text="         " />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
             <StackPanel Margin="20,0,0,0">
                 <Label ></Label>
-                <ListBox HorizontalAlignment="Left" Height="270" VerticalAlignment="Top"  Width="260"/>
+                <ListBox x:Name ="lbTowns" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top"  Width="260">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Id}" />
+                                <TextBlock Text="         " />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
         </StackPanel>
 
