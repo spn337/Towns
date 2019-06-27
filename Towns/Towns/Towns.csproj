@@ -43,7 +43,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlXml" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -93,6 +95,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVVM\RegionModel.cs" />
+    <Compile Include="MVVM\TownModel.cs" />
+    <Compile Include="MVVM\TownTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
