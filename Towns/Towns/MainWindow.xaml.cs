@@ -53,18 +53,34 @@ namespace Towns
             Regions.AddRange(list);
         }
 
-        private void UpdateTowns(int ?typeId)
+        private void UpdateTowns(int? typeId)
         {
             var query = context.Towns.AsQueryable();
-            if(typeId!=null)
+            if (typeId != null)
             {
                 query = query.Where(r => r.RegionId == typeId);
             }
             var list = query.Select(r => new MVVM.TownModel
             {
                 Id = r.Id,
-                Name = r.Name
-            }).ToList();
+                Name = r.Name,
+                RegionId = r.RegionId,
+                TownTypeId = r.TownTypeId,
+            }).ToList()
+            .OrderBy(r => r.TownTypeId)
+            .ThenBy(r => r.Name);
+
+            //додаємо тип населеного пункту перед імям
+            foreach (var item in list)
+            {
+                switch (item.TownTypeId)
+                {
+                    case 1: item.Name = item.Name.ToUpper(); break;
+                    case 2: item.Name = "м." + item.Name; break;
+                    case 3: item.Name = "c." + item.Name; break;
+                }
+            }
+            //////
             Towns.Clear();
             Towns.AddRange(list);
         }
