@@ -67,6 +67,7 @@
     <Compile Include="Entity\EFContext.cs" />
     <Compile Include="Entity\Town.cs" />
     <Compile Include="Entity\TownType.cs" />
+    <Compile Include="Extentions\ObservableExtention.cs" />
     <Compile Include="Migrations\201906270905568_Add tblRegions.cs" />
     <Compile Include="Migrations\201906270905568_Add tblRegions.Designer.cs">
       <DependentUpon>201906270905568_Add tblRegions.cs</DependentUpon>

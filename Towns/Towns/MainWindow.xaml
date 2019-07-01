@@ -15,7 +15,7 @@
 
         <Border BorderThickness="1" BorderBrush="#FF000000" Margin="20,20,20,20">
             <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,0">
-                <ComboBox HorizontalAlignment="Left" Margin="10,10,10,0" VerticalAlignment="Top" Width="150"/>
+                <ComboBox x:Name ="cmbRegions" HorizontalAlignment="Left" Margin="10,10,10,0" VerticalAlignment="Top" Width="150 " />
                 <TextBox TextWrapping="Wrap" Margin="10,10,10,10" Width="260"/>
                 <Button x:Name ="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Width="70" Height="22"/>
             </StackPanel>
@@ -24,26 +24,20 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0">
             <StackPanel>
                 <Label></Label>
-                <ListBox x:Name ="lbRegions" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="260">
+                <ListBox x:Name ="lbRegions" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="260" SelectionChanged="LbRegions_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Id}" />
-                                <TextBlock Text="         " />
-                                <TextBlock Text="{Binding Name}" />
-                            </StackPanel>
+                            <TextBlock Text="{Binding Name}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </StackPanel>
             <StackPanel Margin="20,0,0,0">
-                <Label ></Label>
+                <Label></Label>
                 <ListBox x:Name ="lbTowns" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top"  Width="260">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Id}" />
-                                <TextBlock Text="         " />
                                 <TextBlock Text="{Binding Name}" />
                             </StackPanel>
                         </DataTemplate>

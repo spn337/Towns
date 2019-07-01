@@ -91,7 +91,7 @@ namespace Towns.Migrations
 
             #endregion
 
-            //#region Towns
+            #region TownsRivnenska
             context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
             {
                 Id = 1,
@@ -113,8 +113,123 @@ namespace Towns.Migrations
                 TownTypeId = 3,
                 RegionId = 1
             });
+            #endregion
+            #region TownsVolynska
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 4,
+                Name = "Луцьк",
+                TownTypeId = 1,
+                RegionId = 2
+            });
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 5,
+                Name = "Шацьк",
+                TownTypeId = 3,
+                RegionId = 2
+            });
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 6,
+                Name = "Ковель",
+                TownTypeId = 2,
+                RegionId = 2
+            });
+            #endregion
+            #region TownsLvivska
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 7,
+                Name = "Львів",
+                TownTypeId = 1,
+                RegionId = 3
+            });
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 8,
+                Name = "Радехів",
+                TownTypeId = 2,
+                RegionId = 3
+            });
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 9,
+                Name = "Сокаль",
+                TownTypeId = 2,
+                RegionId = 3
+            });
+            #endregion
+            #region TownsFrankivska
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 10,
+                Name = "Коломия",
+                TownTypeId = 2,
+                RegionId = 4
+            });
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 11,
+                Name = "Делятин",
+                TownTypeId = 2,
+                RegionId = 4
+            });
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 12,
+                Name = "Долина",
+                TownTypeId = 2,
+                RegionId = 4
+            });
+            #endregion
+            #region TownsZakarpatska
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 13,
+                Name = "Нижня Апша",
+                TownTypeId = 3,
+                RegionId = 5
+            });
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 14,
+                Name = "Ясіня",
+                TownTypeId = 2,
+                RegionId = 5
+            });
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 15,
+                Name = "Тячів",
+                TownTypeId = 2,
+                RegionId = 5
+            });
+            #endregion
+            #region TownsChernivetska
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 16,
+                Name = "Вижниця",
+                TownTypeId = 2,
+                RegionId = 6
+            });
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 17,
+                Name = "Чернівці",
+                TownTypeId = 1,
+                RegionId = 6
+            });
+            context.Towns.AddOrUpdate(a => a.Id, new Entity.Town
+            {
+                Id = 18,
+                Name = "Сторожинець",
+                TownTypeId = 2,
+                RegionId = 6
+            });
 
-            //    #endregion
+            #endregion
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
