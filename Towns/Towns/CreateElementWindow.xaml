@@ -1,0 +1,38 @@
+﻿<Window x:Class="Towns.CreateElementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Towns"
+        mc:Ignorable="d"
+        Title="CreateElementWindow" Height="300" Width="230">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+            <RadioButton x:Name ="rbRegion" Content="Регіон" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" Checked="RbRegion_Checked"/>
+            <RadioButton x:Name ="rbTown" Content="Місто" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" Checked="RbTown_Checked"/>
+        </StackPanel>
+
+        <Label x:Name ="lblRegions" Content="Оберіть область:" HorizontalAlignment="Left" Margin="20,10,0,0"   VerticalAlignment="Top" Width="140"/>
+        <ComboBox x:Name ="cmbRegions" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="190" SelectionChanged="CmbRegions_SelectionChanged" IsEnabled="False">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Label x:Name ="lblTownTypes" Content="Оберіть тип:" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="140"/>
+        <ComboBox x:Name ="cmbTownTypes" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="190" IsEnabled="False">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        
+        <Label x:Name ="lblNewName" Content="Введіть нове ім'я:" HorizontalAlignment="Left" Margin="20,10,0,0"   VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name ="tbNewName" HorizontalAlignment="Center" Margin="0,0,0,0" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="190" IsEnabled="False"/>
+        <Button  x:Name ="btnAdd" Content="Додати" HorizontalAlignment="Center"  Margin="0,10,0,0"  Width="110" Height="34" Click="BtnAdd_Click"/>
+
+    </StackPanel>
+</Window>

@@ -24,20 +24,20 @@ namespace Towns
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<MVVM.RegionModel> Regions { get; set; }
-        public ObservableCollection<MVVM.TownTypeModel> TownTypes { get; set; }
-        public ObservableCollection<MVVM.TownModel> Towns { get; set; }
+        public ObservableCollection<MVVM.RegionModel> _regions;
+        public ObservableCollection<MVVM.TownTypeModel> _townTypes;
+        public ObservableCollection<MVVM.TownModel> _towns;
         private readonly EFContext context;
         public MainWindow()
         {
             InitializeComponent();
 
-            Regions = new ObservableCollection<MVVM.RegionModel>();
-            TownTypes = new ObservableCollection<MVVM.TownTypeModel>();
-            Towns = new ObservableCollection<MVVM.TownModel>();
+            _regions = new ObservableCollection<MVVM.RegionModel>();
+            _townTypes = new ObservableCollection<MVVM.TownTypeModel>();
+            _towns = new ObservableCollection<MVVM.TownModel>();
             context = new EFContext();
-            lbRegions.ItemsSource = Regions;
-            lbTowns.ItemsSource = Towns;
+            lbRegions.ItemsSource = _regions;
+            lbTowns.ItemsSource = _towns;
 
             UpdateRegions();
         }
@@ -49,45 +49,55 @@ namespace Towns
                 Id = r.Id,
                 Name = r.Name
             }).ToList();
-            Regions.Clear();
-            Regions.AddRange(list);
+            _regions.Clear();
+            _regions.AddRange(list);
         }
 
         private void UpdateTowns(int? typeId)
         {
-            var query = context.Towns.AsQueryable();
             if (typeId != null)
             {
-                query = query.Where(r => r.RegionId == typeId);
-            }
-            var list = query.Select(r => new MVVM.TownModel
-            {
-                Id = r.Id,
-                Name = r.Name,
-                RegionId = r.RegionId,
-                TownTypeId = r.TownTypeId,
-            }).ToList()
-            .OrderBy(r => r.TownTypeId)
-            .ThenBy(r => r.Name);
+                var query = context.Towns.AsQueryable()
+                .Where(r => r.RegionId == typeId);
 
-            //додаємо тип населеного пункту перед імям
-            foreach (var item in list)
-            {
-                switch (item.TownTypeId)
+                var list = query
+                    .OrderBy(r => r.TownTypeId)
+                    .ThenBy(r => r.Name)
+                    .Select(r => new MVVM.TownModel
+                    {
+                        Id = r.Id,
+                        Name = r.Name,
+                        RegionId = r.RegionId,
+                        TownTypeId = r.TownTypeId,
+                    }).ToList();
+
+                //додаємо тип населеного пункту перед імям
+                foreach (var item in list)
                 {
-                    case 1: item.Name = item.Name.ToUpper(); break;
-                    case 2: item.Name = "м." + item.Name; break;
-                    case 3: item.Name = "c." + item.Name; break;
+                    switch (item.TownTypeId)
+                    {
+                        case 1: item.Name = item.Name.ToUpper(); break;
+                        case 2: item.Name = "м." + item.Name; break;
+                        case 3: item.Name = "c." + item.Name; break;
+                    }
                 }
+                ////
+                _towns.Clear();
+                _towns.AddRange(list);
             }
-            //////
-            Towns.Clear();
-            Towns.AddRange(list);
         }
         private void LbRegions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var data = (sender as ListBox).SelectedItem as MVVM.RegionModel;
-            UpdateTowns(data.Id);
+            var region = (sender as ListBox).SelectedItem as MVVM.RegionModel;
+            UpdateTowns(region?.Id);
+        }
+
+        private void BtnCreate_Click(object sender, RoutedEventArgs e)
+        {
+            CreateElementWindow createElementWindow = new CreateElementWindow();
+            createElementWindow.ShowDialog();
+
+            UpdateRegions();
         }
     }
 }
