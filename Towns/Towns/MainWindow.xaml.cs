@@ -2,19 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Towns.MVVM;
 using Towns.Entity;
 
@@ -101,23 +92,22 @@ namespace Towns
             UpdateRegions();
         }
 
+
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (lbRegions.SelectedIndex != -1)
             {
-                string msg = null;
-
                 if (lbTowns.SelectedIndex == -1)
                 {
                     var r = lbRegions.SelectedValue as RegionModel;
 
-                    msg = "Видалити регіон " + r.Name + "?";
+                    string msg = "Видалити регіон " + r.Name + "?";
 
                     if (MessageBox.Show(msg, "Видалення", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         Region deletedRegion = context.Regions
-                        .Where(o => o.Id == r.Id)
-                        .FirstOrDefault();
+                            .Where(o => o.Id == r.Id)
+                            .FirstOrDefault();
 
                         context.Regions.Remove(deletedRegion);
                         context.SaveChanges();
@@ -129,13 +119,13 @@ namespace Towns
                 {
                     var t = lbTowns.SelectedValue as TownModel;
 
-                    msg = "Видалити місто " + t.Name + "?";
+                    string msg = "Видалити місто " + t.Name + "?";
 
                     if (MessageBox.Show(msg, "Видалення", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         Town deletedTown = context.Towns
-                        .Where(o => o.Id == t.Id)
-                        .FirstOrDefault();
+                            .Where(o => o.Id == t.Id)
+                            .FirstOrDefault();
 
                         context.Towns.Remove(deletedTown);
                         context.SaveChanges();
@@ -146,5 +136,47 @@ namespace Towns
 
             }
         }
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbRegions.SelectedIndex != -1)
+            {
+                if (lbTowns.SelectedIndex == -1)
+                {
+                    var r = lbRegions.SelectedValue as RegionModel;
+                    UpdateElementWindow updateElementWindow = new UpdateElementWindow(r.Name);
+                    updateElementWindow.ShowDialog();
+
+                    string newName = updateElementWindow.tbNewName.Text;
+
+                    Region updatedRegion = context.Regions
+                        .Where(u => u.Id == r.Id)
+                        .FirstOrDefault();
+
+                    updatedRegion.Name = newName;
+                    context.SaveChanges();
+
+                    UpdateRegions();
+                }
+
+                if (lbTowns.SelectedIndex != -1)
+                {
+                    var t = lbTowns.SelectedValue as TownModel;
+                    UpdateElementWindow updateElementWindow = new UpdateElementWindow(t.Name);
+                    updateElementWindow.ShowDialog();
+
+                    string newName = updateElementWindow.tbNewName.Text;
+
+                    Town updatedTown = context.Towns
+                        .Where(u => u.Id == t.Id)
+                        .FirstOrDefault();
+
+                    updatedTown.Name = newName;
+                    context.SaveChanges();
+
+                    UpdateTowns(t.RegionId);
+                }
+            }
+        }
+
     }
 }

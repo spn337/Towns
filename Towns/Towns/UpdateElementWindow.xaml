@@ -1,0 +1,17 @@
+﻿<Window x:Class="Towns.UpdateElementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Towns"
+        mc:Ignorable="d"
+        Title="UpdateElementWindow"  Height="196.667" Width="230">
+    <StackPanel>
+        <TextBox x:Name ="tbOldName" HorizontalAlignment="Center" Margin="0,20,0,0" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="190"/>
+
+        <Label x:Name ="lblNewName" Content="Введіть нове ім'я:" HorizontalAlignment="Left" Margin="20,10,0,0"   VerticalAlignment="Top" Width="140"/>
+        <TextBox x:Name ="tbNewName" HorizontalAlignment="Center" Margin="0,0,0,0" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="190"/>
+
+        <Button  x:Name ="btnUpdate" Content="Оновити" HorizontalAlignment="Center"  Margin="0,20,0,0"  Width="110" Height="34" Click="BtnUpdate_Click"/>
+    </StackPanel>
+</Window>

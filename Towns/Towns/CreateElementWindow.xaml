@@ -13,7 +13,7 @@
         </StackPanel>
 
         <Label x:Name ="lblRegions" Content="Оберіть область:" HorizontalAlignment="Left" Margin="20,10,0,0"   VerticalAlignment="Top" Width="140"/>
-        <ComboBox x:Name ="cmbRegions" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="190" SelectionChanged="CmbRegions_SelectionChanged" IsEnabled="False">
+        <ComboBox x:Name ="cmbRegions" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="190" SelectionChanged="CmbRegions_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
@@ -22,7 +22,7 @@
         </ComboBox>
 
         <Label x:Name ="lblTownTypes" Content="Оберіть тип:" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="140"/>
-        <ComboBox x:Name ="cmbTownTypes" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="190" IsEnabled="False">
+        <ComboBox x:Name ="cmbTownTypes" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="190">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />

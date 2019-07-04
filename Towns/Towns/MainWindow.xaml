@@ -48,7 +48,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="90,10,20,10" Grid.Row="2">
             <Button x:Name ="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="0,10,20,0" VerticalAlignment="Top" Width="120" Height="39" Click="BtnCreate_Click"/>
-            <Button x:Name ="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="0,10,20,0" VerticalAlignment="Top" Width="120" Height="39"/>
+            <Button x:Name ="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="0,10,20,0" VerticalAlignment="Top" Width="120" Height="39" Click="BtnUpdate_Click"/>
             <Button x:Name ="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="0,10,10,0" VerticalAlignment="Top" Width="120" Height="39" Click="BtnDelete_Click"/>
         </StackPanel>
 
