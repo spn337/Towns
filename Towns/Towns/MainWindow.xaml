@@ -6,24 +6,23 @@
         xmlns:local="clr-namespace:Towns"
         mc:Ignorable="d"
         Title="MainWindow" Height="487.807" Width="591.803">
-    <Grid Margin="0,0,2,0">
+    <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" MinHeight="80"/>
-            <RowDefinition Height="290"/>
+            <RowDefinition Height="Auto" MinHeight="60"/>
+            <RowDefinition Height="317"/>
             <RowDefinition Height="Auto" MinHeight="80"/>
         </Grid.RowDefinitions>
 
-        <Border BorderThickness="1" BorderBrush="#FF000000" Margin="20,20,20,20">
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,0">
-                <ComboBox x:Name ="cmbRegions" HorizontalAlignment="Left" Margin="10,10,10,0" VerticalAlignment="Top" Width="150 " />
-                <TextBox TextWrapping="Wrap" Margin="10,10,10,10" Width="260"/>
-                <Button x:Name ="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" Width="70" Height="22"/>
-            </StackPanel>
-        </Border>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="20,10,0,0">
+            <ComboBox x:Name ="cmbSelectType" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="150 " Height="26" SelectionChanged="CmbSelectType_SelectionChanged" />
+            <TextBox x:Name ="tbSearch" Margin="10,10,0,0"  VerticalAlignment="Top"  Width="260" Height="25" TextChanged="TbSearch_TextChanged"/>
+            <Button x:Name ="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50" Height="26" IsEnabled="False" />
+            <Button x:Name ="btnResetSearch" Content="Reset" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="50" Height="26" Click="BtnResetSearch_Click"/>
+        </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="20,0,0,0">
             <StackPanel>
-                <Label></Label>
+                <Label Content="Область:"></Label>
                 <ListBox x:Name ="lbRegions" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="260" SelectionChanged="LbRegions_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -33,16 +32,15 @@
                 </ListBox>
             </StackPanel>
             <StackPanel Margin="20,0,0,0">
-                <Label></Label>
+                <Label Content="Місто:"></Label>
                 <ListBox x:Name ="lbTowns" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top"  Width="260">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}" />
-                            </StackPanel>
+                            <TextBlock Text="{Binding Path=Name}"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                <Label x:Name ="lblWarning" Content ="Max elements = 10" Foreground="Red" Visibility="Hidden"></Label>
             </StackPanel>
         </StackPanel>
 

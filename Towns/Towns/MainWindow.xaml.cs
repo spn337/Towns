@@ -20,6 +20,10 @@ namespace Towns
         public ObservableCollection<TownTypeModel> _townTypes;
         public ObservableCollection<TownModel> _towns;
         private readonly EFContext context;
+
+        private readonly string strRegion = "Область";
+        private readonly string strTown = "Міста";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +34,11 @@ namespace Towns
             context = new EFContext();
             lbRegions.ItemsSource = _regions;
             lbTowns.ItemsSource = _towns;
+
+            cmbSelectType.Items.Add(strRegion);
+            cmbSelectType.Items.Add(strTown);
+
+            tbSearch.IsEnabled = false;
 
             UpdateRegions();
         }
@@ -132,8 +141,6 @@ namespace Towns
                         UpdateTowns(t.RegionId);
                     }
                 }
-
-
             }
         }
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
@@ -147,15 +154,17 @@ namespace Towns
                     updateElementWindow.ShowDialog();
 
                     string newName = updateElementWindow.tbNewName.Text;
+                    if (newName != "")
+                    {
+                        Region updatedRegion = context.Regions
+                            .Where(u => u.Id == r.Id)
+                            .FirstOrDefault();
 
-                    Region updatedRegion = context.Regions
-                        .Where(u => u.Id == r.Id)
-                        .FirstOrDefault();
+                        updatedRegion.Name = newName;
+                        context.SaveChanges();
 
-                    updatedRegion.Name = newName;
-                    context.SaveChanges();
-
-                    UpdateRegions();
+                        UpdateRegions();
+                    }
                 }
 
                 if (lbTowns.SelectedIndex != -1)
@@ -177,6 +186,93 @@ namespace Towns
                 }
             }
         }
+
+        //private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (cmbSelectType.Text == strRegion)
+        //    {
+        //        var query = context.Regions.AsQueryable();
+        //        query = query.Where(x => x.Name.Contains(tbSearch.Text));
+
+        //        var list = query.Select(r => new RegionModel
+        //        {
+        //            Id = r.Id,
+        //            Name = r.Name
+        //        }).ToList();
+        //        _regions.Clear();
+        //        _regions.AddRange(list);
+        //    }
+
+        //    if (cmbSelectType.Text == strTown)
+        //    {
+        //        var query = context.Towns.AsQueryable();
+        //        query = query.Where(x => x.Name.Contains(tbSearch.Text));
+
+        //        var list = query.Select(r => new TownModel
+        //        {
+        //            Id = r.Id,
+        //            Name = r.Name
+        //        }).ToList();
+        //        _towns.Clear();
+        //        _towns.AddRange(list);
+        //    }
+        //}
+
+
+        private void CmbSelectType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tbSearch.IsEnabled = true;
+        }
+        private void BtnResetSearch_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateRegions();
+            UpdateTowns(-1);
+
+            cmbSelectType.Text = "";
+            tbSearch.Text = "";
+            tbSearch.IsEnabled = false;
+
+            lblWarning.Visibility = Visibility.Hidden;
+        }
+
+        private void TbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (cmbSelectType.Text == strRegion)
+            {
+                var query = context.Regions.AsQueryable();
+                query = query.Where(x => x.Name.Contains(tbSearch.Text));
+
+                var list = query.Select(r => new RegionModel
+                {
+                    Id = r.Id,
+                    Name = r.Name
+                })
+                .ToList();
+                _regions.Clear();
+                _towns.Clear();
+                _regions.AddRange(list);
+            }
+
+            if (cmbSelectType.Text == strTown)
+            {
+                var query = context.Towns.AsQueryable();
+                query = query.Where(x => x.Name.Contains(tbSearch.Text))
+                    .Take(10);
+
+                var list = query.Select(r => new TownModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    RegionId = r.RegionId,
+                    TownTypeId = r.TownTypeId
+                }).ToList();
+                _towns.Clear();
+                _towns.AddRange(list);
+            }
+
+            lblWarning.Visibility = Visibility.Visible;
+        }
+
 
     }
 }
